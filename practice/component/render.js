@@ -15,9 +15,15 @@ const compo = {
       'div',
       {
         style: this.styles
+        // ,
+        // on: {
+        //   click: () => { this.$emit('click') }
+        // }
+
       },
       [
-        this.$slots.default,
+        // this.$slots.default, // slot 有name，则this.$slots.name
+        this.$slots.header,
         this.props1
       ]
     )
@@ -49,6 +55,11 @@ new Vue({
   mounted () {
     console.log(this.$refs.comp, this.$refs.span)
   },
+  methods: {
+    handleClick () {
+      console.log('clicked')
+    }
+  },
   // template: `
   //   <div>
   //     <comp-one ref="comp">
@@ -67,15 +78,25 @@ new Vue({
         props: {
           props1: this.value
         },
-        on: {
-
+        // on: {
+        //   click: this.handleClick
+        // },
+        nativeOn: { // 自动绑定到根节点原生dom上，不需要组件再绑定click及手动触发emit
+          click: this.handleClick
         }
       },
       [
         createElement(
           'span',
           {
-            ref: 'span'
+            ref: 'span',
+            slot: 'header',
+            domProps: {
+              innerHTML: '<span>99</span>'
+            },
+            attrs: {
+              id: 'testId'
+            }
           },
           this.value
         )
