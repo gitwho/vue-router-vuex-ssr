@@ -2,9 +2,11 @@
   <div id='app'>
     <div id="cover"></div>
     <Header></Header>
+    <p>{{fullName}} {{counter}}</p>
     <!-- <router-link to='/app'>app</router-link> -->
     <!-- <router-link :to="{name: 'app'}">app</router-link> -->
-    <router-link to="/app/123">app</router-link>
+    <router-link to="/app/123">app123</router-link>
+    <router-link to="/app/456">app456</router-link>
     <router-link to='/login'>login</router-link>
     <!-- <router-link to='/login/exact'>login exact</router-link> -->
     <!-- <todo></todo> -->
@@ -14,25 +16,78 @@
     </transition>
 
     <Footer></Footer>
+
+    <!-- <router-view name="a"/> -->
   </div>
 </template>
 
 <script>
+  import {
+    mapState,
+    mapGetters,
+    mapMutations,
+    mapActions
+  } from 'vuex'
   import Header from './layout/header.vue'
   import Footer from './layout/footer.jsx'
-  import Todo from './views/todo/todo.vue'
+  // import Todo from './views/todo/todo.vue'
 
-  console.log(Header.__docs)
+  // console.log(Header.__docs)
 
   export default {
     components: {
       Header,
-      Footer,
-      Todo
+      Footer
+      // Todo
+    },
+    mounted () {
+      // console.log(this.$route)
+      console.log(this.$store)
+
+      // this.$store.dispatch('updateCountAsync', { // dispatch用来触发action
+      //   num: 5,
+      //   time: 2000
+      // })
+      this.updateCountAsync({
+        num: 5,
+        time: 2000
+      })
+
+      // let i = 1
+      // setInterval(() => { // $store.commit:调用mutation方法 updateCount
+      //   this.$store.commit('updateCount', { // commit 方法只接受两个参数
+      //     num: i++,
+      //     num2: 2
+      //   })
+      // }, 1000)
+      let i = 1
+      setInterval(() => { // $store.commit:调用mutation方法 updateCount
+        this.updateCount({ // commit 方法只接受两个参数
+          num: i++,
+          num2: 2
+        })
+      }, 1000)
+    },
+    methods: {
+      ...mapActions(['updateCountAsync']),
+      ...mapMutations(['updateCount'])
+    },
+    computed: {
+      // ...mapState(['count'])  // 同名
+      // ...mapState({ // 不同命
+      //   counter: 'count'
+      // }),
+      ...mapState({ // 不同命
+        counter: (state) => state.count
+      }),
+      // count () {
+      //   return this.$store.state.count
+      // },
+      ...mapGetters(['fullName'])
+      // fullName () {
+      //   return this.$store.getters.fullName
+      // }
     }
-    // mounted () {
-    //   console.log(this.$route)
-    // }
   }
 </script>
 

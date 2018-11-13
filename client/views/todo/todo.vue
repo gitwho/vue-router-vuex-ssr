@@ -27,9 +27,28 @@ import Tabs from './tabs.vue'
 let id = 0
 
 export default {
-  // props: ['id'],
-  mounted () {
+  // 组件导航钩子
+  beforeRouteEnter (to, from, next) { // 获取数据
+    console.log('todo before enter')
+    next(vm => {
+      console.log('after enter vm.id is', vm.id)
+    })
+  },
+  beforeRouteUpdate (to, from, next) { // 路由切换用到相同组件，获取不同数据，数据出错可以进行错误提醒，不进入下个页面
+    console.log('todo update enter')
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log('todo leave enter')
+    if (global.confirm('are you sure?')) {
+      next()
+    }
+  },
+
+  props: ['id'],
+  mounted () { // 当切换的页面用的是相同的组件，则不会触发，要用beforeRouteEnter获取数据
     console.log(this.id)
+    console.log('todo mounted')
   },
   data () {
     return {
