@@ -13,6 +13,35 @@ export default () => {
     state: defaultState,
     mutations,
     getters,
-    actions
+    actions,
+    modules: {
+      a: {
+        namespaced: true, // a模块的命名空间在a模块下；默认在全局下
+        state: {
+          text: 1
+        },
+        mutations: {
+          updateText (state, text) { // a模块里的state
+            console.log('a.state', state)
+            state.text = text
+          }
+        },
+        getters: {
+          textPlus (state, getters, rootState) { // state: a模块里的state; rootState: 全局的state
+            return state.text + rootState.b.text
+          }
+        },
+        actiions: {
+          add ({ state, commit, rootState }) {
+            commit('updateText', rootState.count, {root: true}) // commit本地mutations; 全局: 加第三参数
+          }
+        }
+      },
+      b: {
+        state: {
+          text: 2
+        }
+      }
+    }
   })
 }

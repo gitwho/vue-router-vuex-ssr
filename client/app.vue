@@ -3,6 +3,7 @@
     <div id="cover"></div>
     <Header></Header>
     <p>{{fullName}} {{counter}}</p>
+    <p>{{textA}} {{textPlus}}</p>
     <!-- <router-link to='/app'>app</router-link> -->
     <!-- <router-link :to="{name: 'app'}">app</router-link> -->
     <router-link to="/app/123">app123</router-link>
@@ -60,30 +61,42 @@
       //     num2: 2
       //   })
       // }, 1000)
-      let i = 1
-      setInterval(() => { // $store.commit:调用mutation方法 updateCount
-        this.updateCount({ // commit 方法只接受两个参数
-          num: i++,
-          num2: 2
-        })
-      }, 1000)
+      // //
+      // let i = 1
+      // setInterval(() => { // $store.commit:调用mutation方法 updateCount
+      //   this.updateCount({ // commit 方法只接受两个参数
+      //     num: i++,
+      //     num2: 2
+      //   })
+      // }, 1000)
+
+      // this.updateText('123') // nameSpace: false 的情况
+      this['a/updateText']('123') // nameSpace: true 的情况
     },
     methods: {
       ...mapActions(['updateCountAsync']),
-      ...mapMutations(['updateCount'])
+      ...mapMutations(['updateCount', 'a/updateText'])
     },
     computed: {
+      // textA () {
+      //   return this.$store.state.a.text
+      // },
+
       // ...mapState(['count'])  // 同名
       // ...mapState({ // 不同命
       //   counter: 'count'
       // }),
       ...mapState({ // 不同命
-        counter: (state) => state.count
+        counter: (state) => state.count,
+        textA: (state) => state.a.text
       }),
       // count () {
       //   return this.$store.state.count
       // },
-      ...mapGetters(['fullName'])
+      ...mapGetters({
+        'fullName': 'fullName',
+        textPlus: 'a/textPlus'
+      })
       // fullName () {
       //   return this.$store.getters.fullName
       // }
