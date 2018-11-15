@@ -19,6 +19,33 @@ Vue.use(VueRouter)
 const router = createRouter()
 const store = createStore()
 
+// 增加模块
+store.registerModule('c', {
+  state: {
+    text: 3
+  }
+})
+
+// 解绑module
+// store.unregisterModule('c') // module名
+
+// 参数：两个方法；第一个方法返回值有变化时，调用第二个方法（为回调函数）
+// store.watch((state) => state.count + 1, (newCount) => {
+//   console.log('new count watched: ', newCount)
+// })
+
+// // vue用于插件
+// // 订阅: 能够监听到mutation被调用
+// store.subscribe((mutation, state) => {
+//   console.log(mutation.type)
+//   console.log(mutation.payload)
+// })
+// // 订阅: 能够监听到action被调用
+// store.subscribeAction((action, state) => {
+//   console.log(action.type)
+//   console.log(action.payload)
+// })
+
 // // 全局导航钩子
 // router.beforeEach((to, from, next) => {
 //   console.log('before each invoked')

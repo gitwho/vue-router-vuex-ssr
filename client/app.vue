@@ -3,7 +3,8 @@
     <div id="cover"></div>
     <Header></Header>
     <p>{{fullName}} {{counter}}</p>
-    <p>{{textA}} {{textPlus}}</p>
+    <!-- <p>{{textA}} {{textPlus}}</p> -->
+    <!-- <p>{{textC}}</p> -->
     <!-- <router-link to='/app'>app</router-link> -->
     <!-- <router-link :to="{name: 'app'}">app</router-link> -->
     <router-link to="/app/123">app123</router-link>
@@ -71,11 +72,15 @@
       // }, 1000)
 
       // this.updateText('123') // nameSpace: false 的情况
-      this['a/updateText']('123') // nameSpace: true 的情况
+      // this['a/updateText']('123') // nameSpace: true 的情况
+      // this['a/add']()
+      // this.testAction()
     },
     methods: {
+      // ...mapActions(['updateCountAsync', 'a/add', 'testAction']),
       ...mapActions(['updateCountAsync']),
-      ...mapMutations(['updateCount', 'a/updateText'])
+      // ...mapMutations(['updateCount', 'a/updateText'])
+      ...mapMutations(['updateCount'])
     },
     computed: {
       // textA () {
@@ -87,15 +92,16 @@
       //   counter: 'count'
       // }),
       ...mapState({ // 不同命
-        counter: (state) => state.count,
-        textA: (state) => state.a.text
+        counter: (state) => state.count
+        // textA: (state) => state.a.text,
+        // textC: state => state.c.text
       }),
       // count () {
       //   return this.$store.state.count
       // },
       ...mapGetters({
-        'fullName': 'fullName',
-        textPlus: 'a/textPlus'
+        'fullName': 'fullName'
+        // textPlus: 'a/textPlus'
       })
       // fullName () {
       //   return this.$store.getters.fullName
