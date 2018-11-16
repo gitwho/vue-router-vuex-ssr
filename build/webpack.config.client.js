@@ -8,6 +8,7 @@ const ExtractPlugin = require('extract-text-webpack-plugin')
 
 const baseConfig = require('./webpack.config.base')
 
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 // package.json启动方式中定义的环境变量 eg: 'NODE_EVN=production' 都存在 process.env中
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -36,7 +37,9 @@ const defaultPlugins = [
 
   new HTMLPlugin({
     template: path.join(__dirname, 'template.html')
-  })
+  }),
+
+  new VueClientPlugin()
 ]
 
 let config

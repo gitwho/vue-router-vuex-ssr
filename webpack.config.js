@@ -87,7 +87,6 @@ if (isDev) {
       errors: true // 显示错误
     },
     // historyFallback: {
-
     // },
     hot: true // 渲染改变的部分
     // open: true    //自动打开浏览器
