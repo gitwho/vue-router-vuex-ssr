@@ -7,8 +7,8 @@ export default [
     redirect: '/app'
   },
   {
-    // path: '/app',
-    path: '/app/:id',
+    path: '/app',
+    // path: '/app/:id',
     props: true, // 推荐 :id的值会通过Todo组件的props传进去
     // props: { // 指定 值 的写法
     //   id: '354'

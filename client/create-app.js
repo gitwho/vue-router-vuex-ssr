@@ -1,3 +1,4 @@
+// 服务端每次要渲染新的app对象
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'

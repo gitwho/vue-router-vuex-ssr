@@ -12,7 +12,7 @@ const config = {
   output: {
     filename: 'bundle.[hash:8].js', // 文件名
     path: path.join(__dirname, '../dist'),
-    publicPath: '/public/' // 会影响设置相关文件路径的配置，eg: webpack.config.client.js里devServer下historyApiFallback里的index路径
+    publicPath: 'http://127.0.0.1:8000/public/' // 会影响设置相关文件路径的配置，eg: webpack.config.client.js里devServer下historyApiFallback里的index路径
     //
   },
   module: {
