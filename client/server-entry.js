@@ -11,6 +11,7 @@ export default context => { // 接收的context是 server.render.js内的context
       if (!matchedComponents.length) {
         return reject(new Error('no component matched'))
       }
+      context.meta = app.$meta()
       resolve(app)
     })
   })

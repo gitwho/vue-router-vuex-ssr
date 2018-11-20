@@ -27,6 +27,9 @@ import Tabs from './tabs.vue'
 let id = 0
 
 export default {
+  metaInfo: {
+    title: 'my TODO page'
+  },
   // 组件导航钩子
   beforeRouteEnter (to, from, next) { // 获取数据
     console.log('todo before enter')

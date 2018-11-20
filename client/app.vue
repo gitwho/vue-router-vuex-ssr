@@ -37,6 +37,9 @@
   // console.log(Header.__docs)
 
   export default {
+    metaInfo: {
+      title: 'my todo app'
+    },
     components: {
       Header,
       Footer

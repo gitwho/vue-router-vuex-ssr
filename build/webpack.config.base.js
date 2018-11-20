@@ -7,11 +7,13 @@ const isDev = process.env.NODE_ENV === 'development'
 const config = {
   target: 'web', // 适应 webpack-dev-server开发模式
   // 配置入口,  __dirname: 当前文件所在的目录地址
-  entry: path.join(__dirname, '../client/index.js'),
+  // entry: path.join(__dirname, '../client/index.js'),
+  entry: path.join(__dirname, '../client/client-entry.js'),
   // 出口
   output: {
     filename: 'bundle.[hash:8].js', // 文件名
-    path: path.join(__dirname, '../dist'),
+    // path: path.join(__dirname, '../dist'),
+    path: path.join(__dirname, '../public'),
     publicPath: 'http://127.0.0.1:8000/public/' // 会影响设置相关文件路径的配置，eg: webpack.config.client.js里devServer下historyApiFallback里的index路径
     //
   },

@@ -2,7 +2,7 @@ const Koa = require('koa')
 const send = require('koa-send')
 const path = require('path')
 
-const pageRouter = require('./routes/dev-ssr')
+// const pageRouter = require('./routes/dev-ssr')
 const app = new Koa()
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -29,6 +29,13 @@ app.use(async (ctx, next) => {
     await next()
   }
 })
+
+let pageRouter
+if (isDev) {
+  pageRouter = require('./routes/dev-ssr')
+} else {
+  pageRouter = require('./routes/ssr')
+}
 
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())
 
