@@ -19,6 +19,7 @@ const devServer = {
   overlay: {
     errors: true // 显示错误
   },
+  headers: { 'Access-Control-Allow-Origin': '*' },
   historyApiFallback: { // 将index文件设置成 路径里的index HTML文件
     // 解决： 去掉“#”的路由的形式，在刷新页面后，服务端匹配不到页面不显示
     index: '/public/index.html'

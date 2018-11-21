@@ -1,8 +1,13 @@
+// 服务端 3333 端口
+
 const Koa = require('koa')
 const send = require('koa-send')
 const path = require('path')
 
 // const pageRouter = require('./routes/dev-ssr')
+
+const staticRouter = require('./routes/static')
+
 const app = new Koa()
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -29,6 +34,8 @@ app.use(async (ctx, next) => {
     await next()
   }
 })
+
+app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
 
 let pageRouter
 if (isDev) {

@@ -6,12 +6,12 @@ const VueServerRender = require('vue-server-renderer')
 
 const serverRender = require('./server-render')
 
-const clientMainfest = require('../../public/vue-ssr-client-manifest.json')
+const clientManifest = require('../../public/vue-ssr-client-manifest.json')
 const renderer = VueServerRender.createBundleRenderer(
   path.join(__dirname, '../../server-build/vue-ssr-server-bundle.json'),
   { // 配置
     inject: false,
-    clientMainfest
+    clientManifest
   }
 )
 
