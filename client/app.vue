@@ -13,6 +13,21 @@
     <!-- <router-link to='/login/exact'>login exact</router-link> -->
     <!-- <todo></todo> -->
 
+    <!-- <tabs>
+      <tab label="text">
+        <span slot="label"></span>
+        <p>this is tab content</p>
+      </tab>
+    </tabs>
+    <ul>
+      <li>label</li>
+      <li>label2</li>
+    </ul>
+    <div class="tab-container">
+      <p>This is tab content</p>
+    </div> -->
+
+
     <transition name="fade">
       <router-view />
     </transition>

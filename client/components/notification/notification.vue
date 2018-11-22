@@ -7,6 +7,8 @@
       class="notification"
       :style="style"
       v-show="visible"
+      @mouseenter="clearTimer"
+      @mouseleave="createTimer"
     >
       <span class="content">{{content}}</span>
       <a class="btn" @click="handleClose">{{btn}}</a>
@@ -45,7 +47,9 @@
       afterLeave () {
         this.$emit('closed')
       },
-      afterEnter () {}
+      afterEnter () {},
+      clearTimer () {},
+      createTimer () {}
     }
   }
 </script>

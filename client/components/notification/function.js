@@ -9,7 +9,7 @@ let seed = 1
 const removeInstance = (instance) => {
   if (!instance) return
   const len = instances.length
-  const index = instances.findIndex(inst => instance.id === inst)
+  const index = instances.findIndex(inst => instance.id === inst.id)
 
   instances.splice(index, 1)
 
@@ -42,6 +42,7 @@ const notify = (options) => {
   instance.id = id
   instance.vm = instance.$mount() // 生成$el对象
   document.body.appendChild(instance.vm.$el)
+  instance.vm.visible = true
 
   // 计算高度
   let verticalOffset = 0
