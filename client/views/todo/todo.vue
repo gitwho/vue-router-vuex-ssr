@@ -1,6 +1,6 @@
 <template>
   <section class="real-app">
-    <div class="tab-container">
+    <div class="tab-con tainer">
       <tabs value="1">
         <tab label="tab1" index="1" />
         <tab index="2"><span slot="label" style="color:red;">tab2</span></tab>
