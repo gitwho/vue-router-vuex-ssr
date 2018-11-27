@@ -22,7 +22,7 @@
       autofocus="autofocus"
       placeholder="接下来要做什么"
       @keyup.enter="addTodo"
-    >
+     >
     <item :todo="todo"
              v-for="todo in filteredTodos"
       :key="todo.id"
