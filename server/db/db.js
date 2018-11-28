@@ -13,7 +13,7 @@ const createError = (code, resp) => {
   return err
 }
 
-//处理请求
+// 处理请求
 const handleRequest = ({ status, data, ...rest}) => {
   if (status === 200) {
     return data
@@ -42,8 +42,34 @@ module.exports = (appId, appKey) => {
         todo,
         { headers: getHeaders() }
       ))
+    },
+    async updateTodo (id, todo) {
+      return handleRequest(await request.put(
+        `/${className}/${id}`,
+        todo,
+        { headers: getHeaders() }
+      ))
+    },
+    async deleteTodo (id) {
+      return handleRequest(await request.delete(
+        `/${className}/${id}`,
+        { headers: getHeaders() }
+      ))
+    },
+    async deleteCompleted (ids) {
+      console.log(ids)
+      const requests = ids.map(id => {
+        return {
+          method: 'DELETE',
+          path: `/mcm/api/${className}/${id}`
+        }
+      })
+      return handleRequest(await request.post(
+        '/batch',
+        {requests},
+        {headers: getHeaders()}
+
+      ))
     }
   }
-
 }
-

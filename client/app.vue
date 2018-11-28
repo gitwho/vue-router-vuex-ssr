@@ -2,7 +2,7 @@
   <div id='app'>
     <div id="cover"></div>
     <Header></Header>
-    <p>{{fullName}} {{counter}}</p>
+    <!-- <p>{{fullName}} {{counter}}</p> -->
     <!-- <p>{{textA}} {{textPlus}}</p> -->
     <!-- <p>{{textC}}</p> -->
     <!-- <router-link to='/app'>app</router-link> -->
@@ -32,7 +32,7 @@
       <router-view />
     </transition>
 
-    <button @click="notify">click me</button>
+    <!-- <button @click="notify">click me</button> -->
     <!-- <notification content="test notify" /> -->
     <Footer></Footer>
 

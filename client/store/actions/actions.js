@@ -1,3 +1,5 @@
+// import model from '../../model/client-model'
+
 export default {
   updateCountAsync (store, data) {
     setTimeout(() => {
@@ -5,5 +7,8 @@ export default {
         num: data.num
       })
     }, data.time)
+  },
+  fetchTodos ({commit}) {
+
   }
 }
