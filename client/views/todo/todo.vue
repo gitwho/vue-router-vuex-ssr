@@ -40,7 +40,10 @@
 <script>
 import Item from './item.vue'
 import Helper from './helper.vue'
-let id = 0
+
+import {mapState, mapActions} from 'vuex'
+
+// let id = 0
 
 export default {
   metaInfo: {
@@ -66,8 +69,9 @@ export default {
 
   props: ['id'],
   mounted () { // 当切换的页面用的是相同的组件，则不会触发，要用beforeRouteEnter获取数据
-    console.log(this.id)
-    console.log('todo mounted')
+    // console.log(this.id)
+    // console.log('todo mounted')
+    this.fetchTodos()
   },
   data () {
     return {
@@ -76,13 +80,14 @@ export default {
       //   content: 'this is todo',
       //   completed: false
       // },
-      todos: [],
+      // todos: [],
       filter: 'all',
       // inputContent: '',
       states1: ['all', 'active', 'completed']
     }
   },
   computed: {
+    ...mapState(['todos']),
     filteredTodos () {
       if (this.filter === 'all') {
         return this.todos
@@ -96,15 +101,16 @@ export default {
     Helper
   },
   methods: {
-    addTodo (e) {
-      console.log(e)
-      this.todos.unshift({
-        id: id++,
-        content: e.target.value.trim(),
-        completed: false
-      })
-      e.target.value = '' // 清空input输入值
-    },
+    ...mapActions(['fetchTodos']),
+    // addTodo (e) {
+    //   console.log(e)
+    //   this.todos.unshift({
+    //     id: id++,
+    //     content: e.target.value.trim(),
+    //     completed: false
+    //   })
+    //   e.target.value = '' // 清空input输入值
+    // },
     deleteTodo (id) {
       this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
     },

@@ -24,8 +24,12 @@ const devServer = {
     // 解决： 去掉“#”的路由的形式，在刷新页面后，服务端匹配不到页面不显示
     index: '/public/index.html'
   },
-  hot: true // 渲染改变的部分
+  hot: true, // 渲染改变的部分
   // open: true    //自动打开浏览器
+  proxy: {
+    '/api': 'http://127.0.0.1:3333',
+    '/user': 'http://127.0.0.1:3333'
+  }
 }
 
 const defaultPlugins = [

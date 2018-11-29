@@ -1,4 +1,8 @@
-// import model from '../../model/client-model'
+import model from '../../model/client-model'
+
+const handleError = () => {
+  //
+}
 
 export default {
   updateCountAsync (store, data) {
@@ -9,6 +13,12 @@ export default {
     }, data.time)
   },
   fetchTodos ({commit}) {
-
+    model.getAllTodos()
+      .then(data => {
+        commit('fillTodos', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
   }
 }
