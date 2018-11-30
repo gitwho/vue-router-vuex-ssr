@@ -21,12 +21,13 @@
       class="add-input"
       autofocus="autofocus"
       placeholder="接下来要做什么"
-      @keyup.enter="addTodo"
+      @keyup.enter="handleAdd"
      >
     <item :todo="todo"
              v-for="todo in filteredTodos"
       :key="todo.id"
       @del="deleteTodo"
+      @toggle="toggleTodoState"
     ></item>
     <Helper :filter="filter"
       :todos="todos"
@@ -101,24 +102,39 @@ export default {
     Helper
   },
   methods: {
-    ...mapActions(['fetchTodos']),
-    // addTodo (e) {
-    //   console.log(e)
-    //   this.todos.unshift({
-    //     id: id++,
-    //     content: e.target.value.trim(),
-    //     completed: false
-    //   })
-    //   e.target.value = '' // 清空input输入值
-    // },
-    deleteTodo (id) {
-      this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+    ...mapActions(['fetchTodos', 'addTodo', 'deleteTodo', 'updateTodo', 'deleteAllCompleted']),
+    handleAdd (e) {
+      const content = e.target.value.trim()
+      if (!content) {
+        this.$notify({
+          content: '必须输入要做的内容'
+        })
+        return
+      }
+      const todo = {
+        content,
+        completed: false
+      }
+      this.addTodo(todo)
+      e.target.value = ''
     },
+    // deleteTodo (id) {
+    //   this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+    // },
     clearAllCompleted () {
-      this.todos = this.todos.filter(todo => !todo.completed)
+      // this.todos = this.todos.filter(todo => !todo.completed)
+      this.deleteAllCompleted()
     },
     handleChangeTab (value) {
       this.filter = value
+    },
+    toggleTodoState (todo) {
+      this.updateTodo({
+        id: todo.id,
+        todo: Object.assign({}, todo, {
+          completed: !todo.completed
+        })
+      })
     }
   }
 }

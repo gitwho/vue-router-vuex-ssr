@@ -2,7 +2,8 @@
   <div :class="['todo-item', todo.completed ? 'completed' : '']">
     <input type="checkbox"
       class="toggle"
-      v-model="todo.completed"
+      :checked="todo.completed"
+      @click="handleTaggle"
     >
     <label>{{todo.content}}</label>
     <button class="destory" @cilck="deleteTodo"></button>
@@ -20,6 +21,10 @@
     methods: {
       deleteTodo () {
         this.$emit('del', this.todo.id)
+      },
+      handleTaggle (e) {
+        e.preventDefault()
+        this.$emit('toggle', this.todo)
       }
     }
   }
