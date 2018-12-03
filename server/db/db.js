@@ -1,7 +1,7 @@
 const sha1 = require('sha1')
 const axios = require('axios')
 
-const className = 'todo'
+const className = 'todo' // 数据库命名
 
 const request = axios.create({
   baseURL: 'https://d.apicloud.com/mcm/api'
@@ -13,8 +13,8 @@ const createError = (code, resp) => {
   return err
 }
 
-// 处理请求
-const handleRequest = ({ status, data, ...rest}) => {
+// 处理请求返回值status, data, ...rest
+const handleRequest = ({ status, data, ...rest }) => {
   if (status === 200) {
     return data
   } else {

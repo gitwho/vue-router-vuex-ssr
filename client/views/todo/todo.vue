@@ -63,9 +63,9 @@ export default {
   },
   beforeRouteLeave (to, from, next) {
     console.log('todo leave enter')
-    if (global.confirm('are you sure?')) {
-      next()
-    }
+    // if (global.confirm('are you sure?')) {
+    //   next()
+    // }
   },
 
   props: ['id'],

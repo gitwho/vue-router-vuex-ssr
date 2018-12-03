@@ -42,6 +42,7 @@ app.use(async (ctx, next) => {
   }
 })
 
+// appRouter 拿到db
 app.use(async (ctx, next) => {
   ctx.db = db
   await next()

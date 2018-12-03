@@ -6,7 +6,8 @@
       @click="handleTaggle"
     >
     <label>{{todo.content}}</label>
-    <button class="destory" @cilck="deleteTodo"></button>
+
+    <button class="destory" @click="deleteTodoItem"></button>
   </div>
 </template>
 
@@ -19,7 +20,7 @@
       }
     },
     methods: {
-      deleteTodo () {
+      deleteTodoItem () {
         this.$emit('del', this.todo.id)
       },
       handleTaggle (e) {

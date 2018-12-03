@@ -1,6 +1,9 @@
 <template>
   <div id='app'>
     <div id="cover"></div>
+    <div id="loading" v-show="loading">
+      <loading></loading>
+    </div>
     <Header></Header>
     <!-- <p>{{fullName}} {{counter}}</p> -->
     <!-- <p>{{textA}} {{textPlus}}</p> -->
@@ -28,7 +31,7 @@
     </div> -->
 
 
-    <transition name="fade">
+    <transition name="fade" mode="out-in">
       <router-view />
     </transition>
 
@@ -49,6 +52,7 @@
   } from 'vuex'
   import Header from './layout/header.vue'
   import Footer from './layout/footer.jsx'
+  import Loading from './components/loading/loading.vue'
   // import Todo from './views/todo/todo.vue'
 
   // console.log(Header.__docs)
@@ -59,7 +63,8 @@
     },
     components: {
       Header,
-      Footer
+      Footer,
+      Loading
       // Todo
     },
     mounted () {
@@ -110,6 +115,7 @@
       }
     },
     computed: {
+      ...mapState(['loading']),
       // textA () {
       //   return this.$store.state.a.text
       // },
@@ -120,6 +126,7 @@
       // }),
       ...mapState({ // 不同命
         counter: (state) => state.count
+
         // textA: (state) => state.a.text,
         // textC: state => state.c.text
       }),
@@ -155,4 +162,16 @@
     opacity .9
     z-index -1
   }
+  #loading{
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+  background-color rgba(255,255,255,.3)
+  z-index 99
+  display flex
+  align-items center
+  justify-content center
+}
 </style>
