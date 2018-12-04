@@ -101,6 +101,14 @@ export default {
     Item,
     Helper
   },
+  asyncData ({store}) {
+    return store.dispatch('fetchTodos')
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve(123)
+    //   }, 1000)
+    // })
+  },
   methods: {
     ...mapActions(['fetchTodos', 'addTodo', 'deleteTodo', 'updateTodo', 'deleteAllCompleted']),
     handleAdd (e) {

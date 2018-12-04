@@ -20,6 +20,7 @@ const handleRequest = (request) => {
       resolve(data.data)
     }).catch(err => { // axios 会将200外其他的一些当作错误
       const resp = err.response
+      console.log('--------', resp)
       if (resp.status === 401) {
         reject(createError(401, 'need auth'))
       }

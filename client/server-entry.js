@@ -2,7 +2,7 @@ import createApp from './create-app'
 
 export default context => { // 接收的context是 server.render.js内的context： const appString = await renderer.renderToString(context)
   return new Promise((resolve, reject) => {
-    const { app, router } = createApp()
+    const { app, router, store } = createApp()
 
     router.push(context.url)
 
@@ -11,8 +11,18 @@ export default context => { // 接收的context是 server.render.js内的context
       if (!matchedComponents.length) {
         return reject(new Error('no component matched'))
       }
-      context.meta = app.$meta()
-      resolve(app)
+      Promise.all(matchedComponents.map(Component => {
+        if (Component.asyncData) {
+          return Component.asyncData({
+            route: router.currentRoute,
+            store
+          })
+        }
+      })).then(data => {
+        // console.log(store.state)
+        context.meta = app.$meta()
+        resolve(app)
+      })
     })
   })
 }
