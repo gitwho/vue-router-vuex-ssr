@@ -78,7 +78,6 @@
     color #3d3d3d
 .login-input
   appearance none
-  padding 0 10px
   line-height 30px
   margin-bottom 20px
   border 1px solid #aaa

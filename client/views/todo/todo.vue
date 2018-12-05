@@ -72,7 +72,9 @@ export default {
   mounted () { // 当切换的页面用的是相同的组件，则不会触发，要用beforeRouteEnter获取数据
     // console.log(this.id)
     // console.log('todo mounted')
-    this.fetchTodos()
+    if (this.todos && this.todos.length < 1) {
+      this.fetchTodos()
+    }
   },
   data () {
     return {
@@ -101,8 +103,12 @@ export default {
     Item,
     Helper
   },
-  asyncData ({store}) {
-    return store.dispatch('fetchTodos')
+  asyncData ({store, router}) {
+    if (store.state.user) {
+      return store.dispatch('fetchTodos')
+    }
+    router.replace('/login')
+    return Promise.resolve()
     // return new Promise((resolve) => {
     //   setTimeout(() => {
     //     resolve(123)

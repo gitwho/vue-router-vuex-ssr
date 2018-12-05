@@ -4,6 +4,10 @@ export default context => { // 接收的context是 server.render.js内的context
   return new Promise((resolve, reject) => {
     const { app, router, store } = createApp()
 
+    if (context.user) {
+      store.state.user = context.user
+    }
+
     router.push(context.url)
 
     router.onReady(() => {
@@ -15,12 +19,15 @@ export default context => { // 接收的context是 server.render.js内的context
         if (Component.asyncData) {
           return Component.asyncData({
             route: router.currentRoute,
+            router,
             store
           })
         }
       })).then(data => {
         // console.log(store.state)
         context.meta = app.$meta()
+        context.state = store.state
+        context.router = router
         resolve(app)
       })
     })
